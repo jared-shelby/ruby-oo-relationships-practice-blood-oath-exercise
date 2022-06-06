@@ -27,6 +27,7 @@ s3 = BloodOath.new(dba, tornado)
 s4 = BloodOath.new(tbh, tornado)
 s5 = BloodOath.new(xxx, blessed)
 s6 = BloodOath.new(xxx, tornado)
+s7 = BloodOath.new(xxx, majestic)
 
 
 # ===== TESTING ===== #

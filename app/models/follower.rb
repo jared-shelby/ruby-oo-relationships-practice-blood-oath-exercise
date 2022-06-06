@@ -20,7 +20,7 @@ class Follower
 
     # return array of Cult instances where this Follower is included in the followers list
     def cults
-        Cult.all.select { |cult| cult.followers.include?(self) }
+        BloodOath.all.select { |oath| oath.follower == self }.collect { |oath| oath.cult }
     end
 
     # recruit this Follower instance within the followers list of the given cult
@@ -38,13 +38,20 @@ class Follower
         self.cults.collect { |cult| cult.slogan }
     end
 
+    # create hash of followers and their # of cults joined
+    def self.hash_follower_to_num_cults
+        hash = {}
+        self.all.each { |follower| hash[follower] = follower.cults.count }
+        hash
+    end
+
     # return Follower instance who has joined the most cults
     def self.most_active
-
+        self.hash_follower_to_num_cults.max_by { |key, value| value }
     end
 
     # returns array of ten most active Follower instances
     def self.top_ten
-
+        self.hash_follower_to_num_cults.max_by(10) { |key, value| value }
     end
 end

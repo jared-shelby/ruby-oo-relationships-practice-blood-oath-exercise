@@ -64,8 +64,13 @@ class Cult
         self.all.min_by { |cult| cult.cult_population }
     end
 
+    # create hash of locations and their # of cults
+    def self.hash_locations_count
+        self.all.collect { |cult| cult.location }.tally
+    end
+
     # return string of location with the most cults
     def self.most_common_location
-        nil
+        self.hash_locations_count.max_by { |key, value| value }[0]
     end
 end

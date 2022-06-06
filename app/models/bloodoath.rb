@@ -17,4 +17,9 @@ class BloodOath
     def self.all
         @@all
     end
+
+    # compare every oath and extract the minimum (earliest) time of initiation
+    def self.first_oath
+        self.all.min { |oath_a, oath_b| Time.parse(oath_a.initiation_date) <=> Time.parse(oath_b.initiation_date) }.follower
+    end
 end
