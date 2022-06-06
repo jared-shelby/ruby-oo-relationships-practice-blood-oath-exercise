@@ -3,10 +3,15 @@ class Cult
     @@all = []
     
     # read/write to Cult instance attributes
-    attr_accessor :name, :location, :founding_year, :slogan, :cult_population, :followers
+    attr_reader :name, :location, :founding_year, :slogan
+    attr_accessor :cult_population, :followers
 
     # store each instance of Cult
-    def initialize
+    def initialize(name, location, founding_year, slogan)
+        @name = name
+        @location = location
+        @founding_year = founding_year
+        @slogan = slogan
         @followers = []
         @@all << self
     end
@@ -24,5 +29,15 @@ class Cult
     # return Cult instance that matches string passed in
     def self.find_by_name(cult_name)
         self.all.detect { |cult| cult.name == cult_name }
+    end
+
+    # return array of Cult instances located in string passed in
+    def self.find_by_location(cult_location)
+        self.all.select { |cult| cult.location == cult_location }
+    end
+
+    # return array of Cult instances founded in year passed in
+    def self.find_by_founding_year(year)
+        self.all.select { |cult| cult.year == year }
     end
 end
