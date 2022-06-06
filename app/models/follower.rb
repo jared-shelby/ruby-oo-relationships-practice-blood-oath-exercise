@@ -32,4 +32,19 @@ class Follower
     def self.of_a_certain_age(age)
         self.all.select { |follower| follower.age >= age }
     end
+
+    # return slogan for each Cult instance this Follower instance belongs to
+    def my_cults_slogans
+        self.cults.collect { |cult| cult.slogan }
+    end
+
+    # return Follower instance who has joined the most cults
+    def self.most_active
+
+    end
+
+    # returns array of ten most active Follower instances
+    def self.top_ten
+
+    end
 end
