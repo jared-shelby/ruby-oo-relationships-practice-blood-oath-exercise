@@ -21,8 +21,13 @@ tbh = Follower.new("TBH", 12, "Goo goo gah gah.")
 xxx = Follower.new("XXX", 27, "Yes, queen!")
 
 # == create BloodOath instances ==
-sacrifice1 = BloodOath.new("2022-06-06")
-sacrifice2 = BloodOath.new("2020-03-18")
+s1 = BloodOath.new(mxm, majestic)
+s2 = BloodOath.new(dba, majestic)
+s3 = BloodOath.new(dba, tornado)
+s4 = BloodOath.new(tbh, tornado)
+s5 = BloodOath.new(xxx, blessed)
+s6 = BloodOath.new(xxx, tornado)
+
 
 # ===== TESTING ===== #
 

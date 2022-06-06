@@ -4,7 +4,6 @@ class Cult
     
     # read/write to Cult instance attributes
     attr_reader :name, :location, :founding_year, :slogan
-    attr_accessor :cult_population, :followers
 
     # store each instance of Cult
     def initialize(name, location, founding_year, slogan)
@@ -12,7 +11,6 @@ class Cult
         @location = location
         @founding_year = founding_year
         @slogan = slogan
-        @followers = []
         @@all << self
     end
 
@@ -23,7 +21,17 @@ class Cult
 
     # add Follower to list of Cult instance's followers
     def recruit_follower(follower)
-        self.followers.push(follower)
+        BloodOath.new(follower, self)
+    end
+
+    # return list of Cult instance's followers
+    def followers
+        BloodOath.all.select { |oath| oath.cult == self }.collect { |oath| oath.follower }
+    end
+
+    # return number of followers in Cult instance using BloodOaths
+    def cult_population
+        followers.count
     end
 
     # return Cult instance that matches string passed in
@@ -38,6 +46,26 @@ class Cult
 
     # return array of Cult instances founded in year passed in
     def self.find_by_founding_year(year)
-        self.all.select { |cult| cult.year == year }
+        self.all.select { |cult| cult.founding_year == year }
+    end
+
+    # return average age of Cult instance's followers
+    def average_age
+        followers.collect { |follower| follower.age }.sum.to_f / self.cult_population
+    end
+
+    # return all of this Cult instance's follower mottos
+    def my_followers_mottos
+        followers.collect { |follower| follower.life_motto }
+    end
+
+    # return cult with least number of followers
+    def self.least_popular
+        self.all.min_by { |cult| cult.cult_population }
+    end
+
+    # return string of location with the most cults
+    def self.most_common_location
+        nil
     end
 end
